@@ -12,6 +12,12 @@ class test_InstanceNames(unittest.TestCase):
     def setUp(self):
         pass
     
+    def test_class_creation(self):
+        try:
+            DBEISCarbonFactors.CarbonFactors(2018)
+        except:
+            self.fail("Cannot create CarbonFactors instance")
+    
     def test_letters_for_instance_name(self):
         with self.assertRaises(ValueError):
             DBEISCarbonFactors.CarbonFactors("xxxyyyxxxyyyxxy")
