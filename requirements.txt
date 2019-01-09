@@ -15,7 +15,7 @@ baresql==0.7.4
 bcolz==1.2.0
 beautifulsoup4==4.6.0
 blaze==0.10.1
-bleach==2.1.3
+bleach==2.1.4
 blosc==1.5.1
 bloscpack==0.11.0
 bokeh==0.12.15
