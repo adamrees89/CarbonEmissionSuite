@@ -18,12 +18,13 @@ class test_InstanceNames(unittest.TestCase):
     def test_create_sql_database(self):
         try:
             DBEISCarbonFactors.CarbonFactors.sqlCreateTable(
-                    self,"mydatabase.db")
+                    self, "mydatabase.db")
         except Exception as e:
             self.fail(f"\nFailed to create SQLite3 database. Error: {e}")
 
     def tearDown(self):
         os.remove("mydatabase.db")
+
 
 if __name__=='__main__':
     unittest.main()
