@@ -12,14 +12,18 @@ import DBEISCarbonFactors
 class test_InstanceNames(unittest.TestCase):
     
     def setUp(self):
+        self.year = 2018
         pass
 
     def test_create_sql_database(self):
-        database = "mydatabase.db"
         try:
-            DBEISCarbonFactors.sqlCreateTable(database)
+            DBEISCarbonFactors.CarbonFactors.sqlCreateTable(
+                    self,"mydatabase.db")
         except Exception as e:
             self.fail(f"\nFailed to create SQLite3 database. Error: {e}")
 
     def tearDown(self):
         os.remove("mydatabase.db")
+
+if __name__=='__main__':
+    unittest.main()
