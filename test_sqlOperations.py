@@ -26,5 +26,5 @@ class test_InstanceNames(unittest.TestCase):
         os.remove("mydatabase.db")
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     unittest.main()
