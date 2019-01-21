@@ -50,7 +50,7 @@ class CarbonFactors(object):
         #Set up the variables here
         try:
             int(year)
-            if 2002 <= year <= Now[0]+1:
+            if 2014 <= year <= Now[0]+1:
                 pass
             else:
                 raise ValueError("Input string was not a valid year")
@@ -62,6 +62,7 @@ class CarbonFactors(object):
         f"greenhouse-gas-reporting-conversion-factors-{year}")     
         self.downloadLink = "None"
         self.fileType = ""
+        self.DownloadInfo = ""
         
         #Now we check if the URL exists, currently we print the result"
         self.UrlCheckResponse = self.urlCheck()
@@ -88,8 +89,8 @@ class CarbonFactors(object):
             try:
                 self.sqlDumpFlatFile(self.database)
             except Exception as e:
-                print("Exception raised when trying to write values to the "
-                      f"database.\nThrown Error: {e}\n")
+                print("Exception raised"
+                      f"\nThrown Error: {e}\n")
 
         else:
             print(f"No Download found for {self.year}\n")
@@ -114,7 +115,7 @@ class CarbonFactors(object):
             return True
         else:
             return False
-    
+
     def FetchCFLink(self):
         """
         This function provides a downloads webpage from where the carbon
@@ -131,13 +132,12 @@ class CarbonFactors(object):
             linkList.append(link.get('href'))
         
         try:
+            self.DownloadInfo = self.linkTypeFunc(linkList)
             self.downloadLink = ''.join([URLPrepend,
-                                         self.linkTypeFunc(linkList)])             
+                                         self.DownloadInfo])             
         except Exception as e:
             logging.critical(f"\nError: {e}\n")
             self.downloadLink = "https://theuselessweb.com/"
-        
-        return self.downloadLink   
     
     def linkTypeFunc(self,listLinks):
         """
@@ -147,36 +147,15 @@ class CarbonFactors(object):
         file.  This subfunction returns the downloadLink and fileType variable
         to the FetchCF function.
         """
+        
         substringFlatFile = "Flat"
         substringFlatFile2 = "flat"
-        substringAdvanced = "advanced_users"
-        substringAdvancedOld = "full_factor"
-        FlatfileFlag = 0
-        AdvancedFlag = 0
-        AdvancedOldFlag = 0
-        
+
         for entry in listLinks:
             if (entry.find(substringFlatFile) != -1 
-            or entry.find(substringFlatFile2) != -1):
+                or entry.find(substringFlatFile2) != -1):
                 Flatfile = entry
-                FlatfileFlag = 1
-            if entry.find(substringAdvanced) != -1:
-                Advanced = entry
-                AdvancedFlag = 1
-            if entry.find(substringAdvancedOld) != -1:
-                AdvancedOld = entry
-                AdvancedOldFlag = 1
-            else:
-                continue
-        
-        if FlatfileFlag == 1:
-            return Flatfile
-        elif AdvancedFlag == 1:
-            return Advanced
-        elif AdvancedOldFlag == 1:
-            return AdvancedOld
-        else:
-            raise Exception(f'No viable link found for year: {self.year}')
+                return Flatfile
     
     def downloadFile(self):
         '''
@@ -236,7 +215,6 @@ class CarbonFactors(object):
         wb = xlrd.open_workbook(self.DownloadLocation)
         ws = wb.sheet_by_name("Factors by Category")
         hd = {}
-#        conn = sqlite3.connect(os.path.join(self.downloadDir,'Database.db'))
         conn = sqlite3.connect(database)
         c = conn.cursor()        
         
@@ -263,7 +241,7 @@ class CarbonFactors(object):
         except Exception as e:
             logging.info("Deleting data threw an exception, continuing,"
                          " It propably means that the database hasn't been"
-                         " created yet")
+                         f" created yet. Error: {e}")
             pass
         
         """
@@ -319,8 +297,8 @@ class CarbonFactors(object):
         except:
             conn.rollback()
             raise RuntimeError("An Error occured in the sqlDumpFlatFile "
-                               "function")
-                
+                               "function.")
+
 """
 Definition of the instances for testing
 
@@ -331,9 +309,12 @@ if __name__ == "__main__":
     start = time.time()
     count = 0
     for i in range(2014,Now[0]+1):
-        CarbonFactors(i)
-        count = count + 1
+        try:
+            CarbonFactors(i)
+            count = count + 1
+        except:
+            pass
 
     end = time.time()    
-    print(f"Completed, I ran {count} download and record operations.  It took"
+    print(f"Completed, I ran {count} operations.  It took"
           f" {round(end-start,2)} seconds.")
