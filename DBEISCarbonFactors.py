@@ -134,7 +134,7 @@ class CarbonFactors(object):
         try:
             self.DownloadInfo = self.linkTypeFunc(linkList)
             self.downloadLink = ''.join([URLPrepend,
-                                         self.DownloadInfo])             
+                                         self.DownloadInfo])
         except Exception as e:
             logging.critical(f"\nError: {e}\n")
             self.downloadLink = "https://theuselessweb.com/"
@@ -147,13 +147,13 @@ class CarbonFactors(object):
         file.  This subfunction returns the downloadLink and fileType variable
         to the FetchCF function.
         """
-        
+
         substringFlatFile = "Flat"
         substringFlatFile2 = "flat"
 
         for entry in listLinks:
             if (entry.find(substringFlatFile) != -1 
-                or entry.find(substringFlatFile2) != -1):
+            or entry.find(substringFlatFile2) != -1):
                 Flatfile = entry
                 return Flatfile
     
@@ -312,7 +312,8 @@ if __name__ == "__main__":
         try:
             CarbonFactors(i)
             count = count + 1
-        except:
+        except Exception as e:
+            logging.debug(f"Error: {e}")
             pass
 
     end = time.time()    
