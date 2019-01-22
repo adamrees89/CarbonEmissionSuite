@@ -29,12 +29,9 @@ class test_InstanceNames(unittest.TestCase):
                       f"older flat file format.  Error: {e}")
 
     def test_non_flat_file_class_creation(self):
-        try:
-            # New we are going to create a class with an advanced file format
+        # New we are going to create a class with an advanced file format
+        with self.assertRaises(ValueError):
             DBEISCarbonFactors.CarbonFactors(2012)
-        except Exception as e:
-            self.fail("\nCannot create CarbonFactors instance with "
-                      f"advanced file format.  Error: {e}")
 
     def test_letters_for_instance_name(self):
         with self.assertRaises(ValueError):
