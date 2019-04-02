@@ -44,12 +44,12 @@ class test_InstanceNames(unittest.TestCase):
     def test_future_year(self):
         with self.assertRaises(ValueError):
             DBEISCarbonFactors.CarbonFactors(2050)
-    
+
     def test_urlCheckResponse(self):
         pageurl = "http://google.co.uk/dfhsdkfnksldf"
         try:
-            response = DBEISCarbonFactors.CarbonFactors.urlCheck(self,pageurl)
-            if not response == True:
+            response = DBEISCarbonFactors.CarbonFactors.urlCheck(self, pageurl)
+            if response == False:
                 pass
             elif response == True:
                 self.fail("\nReturned a True value")
