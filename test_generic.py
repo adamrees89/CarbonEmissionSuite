@@ -49,7 +49,7 @@ class test_InstanceNames(unittest.TestCase):
         pageurl = "http://google.co.uk/dfhsdkfnksldf"
         try:
             response = DBEISCarbonFactors.CarbonFactors.urlCheck(self, pageurl)
-            if response == False:
+            if response is False:
                 pass
             elif response == True:
                 self.fail("\nReturned a True value")
