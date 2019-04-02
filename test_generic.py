@@ -51,7 +51,7 @@ class test_InstanceNames(unittest.TestCase):
             response = DBEISCarbonFactors.CarbonFactors.urlCheck(self, pageurl)
             if response is False:
                 pass
-            elif response == True:
+            elif response is True:
                 self.fail("\nReturned a True value")
         except Exception as e:
             self.fail("\nCannot handle response other than 200. "
