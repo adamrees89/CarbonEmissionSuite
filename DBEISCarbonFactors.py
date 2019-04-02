@@ -34,9 +34,10 @@ try:
                         level=logging.INFO)
     logging.info(f'\nDate and Time:\n {now}' 
                  '\n-------------------------------\n')
-except:
+except Exception as e:  # pragma: no cover
     logging.critical("Error with the set-up of the logging function"
-                     "Sys.exit(1), try/except block line 30-40\n")
+                     "Sys.exit(1), try/except block line 30-40\n"
+                     f"Error: {e}\n")
     sys.exit(1)
 
 class CarbonFactors(object):
@@ -65,9 +66,9 @@ class CarbonFactors(object):
         self.DownloadInfo = ""
         
         #Now we check if the URL exists, currently we print the result"
-        self.UrlCheckResponse = self.urlCheck()
+        self.UrlCheckResponse = self.urlCheck(self.pageurl)
         if self.UrlCheckResponse == True:
-            if sys.platform == "win32":
+            if sys.platform == "win32":  # pragma: no cover
                 import winshell
                 logging.debug("I am working on a Windows machine!\n")
                 self.downloadDir = os.path.join(winshell.personal_folder(),
@@ -88,7 +89,7 @@ class CarbonFactors(object):
             self.sqlCreateTable(self.database)
             try:
                 self.sqlDumpFlatFile(self.database)
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 print("Exception raised"
                       f"\nThrown Error: {e}\n")
 
@@ -108,9 +109,9 @@ class CarbonFactors(object):
                      f"Year: {self.year} has been downloaded and assimilated "
                      "into the database\n")
          
-    def urlCheck(self):
+    def urlCheck(self, pageurl):
         #This function retrives the head of the url and checks the status code
-        request = requests.head(self.pageurl)
+        request = requests.head(pageurl)
         if request.status_code == 200:
             return True
         else:
@@ -171,7 +172,7 @@ class CarbonFactors(object):
             try:
                 os.makedirs(self.downloadDir,exist_ok=True)
                 wget.download(self.downloadLink,self.DownloadLocation)
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 print(f"ERROR WITH DOWNLOAD: {e}\n")
     
     def sqlCreateTable(self,database):
@@ -197,7 +198,7 @@ class CarbonFactors(object):
             c.execute(table_sql)            
             conn.commit()
             conn.close()
-        except sqlite3.Error as e:
+        except sqlite3.Error as e:  # pragma: no cover
             logging.debug("Error when creating table named: "
                          f"{self.tableName}.\nError: {e}")
             
@@ -238,7 +239,7 @@ class CarbonFactors(object):
         try:
             c.execute(f"DELETE FROM {self.tableName}")
             logging.debug("Deleted table data")
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.info("Deleting data threw an exception, continuing,"
                          " It propably means that the database hasn't been"
                          f" created yet. Error: {e}")
@@ -294,10 +295,10 @@ class CarbonFactors(object):
                 c.execute(insert_sql, d)
             conn.commit()
             conn.close()     
-        except:
+        except Exception as e:  # pragma: no cover
             conn.rollback()
             raise RuntimeError("An Error occured in the sqlDumpFlatFile "
-                               "function.")
+                               f"function.  Error: {e}")
 
 """
 Definition of the instances for testing
@@ -305,7 +306,7 @@ Definition of the instances for testing
 From 2014 onwards we have flat files, and before that advanced...
 """
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     start = time.time()
     count = 0
     for i in range(2014,Now[0]+1):

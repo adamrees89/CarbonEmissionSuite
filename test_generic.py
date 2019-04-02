@@ -45,5 +45,17 @@ class test_InstanceNames(unittest.TestCase):
         with self.assertRaises(ValueError):
             DBEISCarbonFactors.CarbonFactors(2050)
 
+    def test_urlCheckResponse(self):
+        pageurl = "http://google.co.uk/dfhsdkfnksldf"
+        try:
+            response = DBEISCarbonFactors.CarbonFactors.urlCheck(self, pageurl)
+            if response is False:
+                pass
+            elif response is True:
+                self.fail("\nReturned a True value")
+        except Exception as e:
+            self.fail("\nCannot handle response other than 200. "
+                      f"Error: {e}")
+
 if __name__=='__main__':
     unittest.main()
