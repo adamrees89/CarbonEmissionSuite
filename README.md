@@ -1,7 +1,7 @@
 # CarbonEmissionSuite
 
 [![Known Vulnerabilities](https://snyk.io/test/github/adamrees89/CarbonEmissionSuite/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/adamrees89/CarbonEmissionSuite?targetFile=requirements.txt)
-[![Build Status](https://travis-ci.org/adamrees89/CarbonEmissionSuite.svg?branch=master)](https://travis-ci.org/adamrees89/CarbonEmissionSuite)
+[![Build Status](https://app.travis-ci.com/adamrees89/CarbonEmissionSuite.svg?branch=master)](https://app.travis-ci.com/adamrees89/CarbonEmissionSuite)
 [![Coverage Status](https://coveralls.io/repos/github/adamrees89/CarbonEmissionSuite/badge.svg?branch=master)](https://coveralls.io/github/adamrees89/CarbonEmissionSuite?branch=master)
 [![](https://img.shields.io/github/license/adamrees89/CarbonEmissionSuite.svg)](https://choosealicense.com/licenses/mit/)
 
