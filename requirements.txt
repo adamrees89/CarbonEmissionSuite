@@ -1,4 +1,4 @@
-beautifulsoup4==4.7.1
+beautifulsoup4==4.11.1
 requests==2.28.2
 wget==3.2
 xlrd==1.2.0
