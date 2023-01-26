@@ -134,8 +134,7 @@ class CarbonFactors(object):
         
         try:
             self.DownloadInfo = self.linkTypeFunc(linkList)
-            self.downloadLink = ''.join([URLPrepend,
-                                         self.DownloadInfo])
+            self.downloadLink = ''.join([self.DownloadInfo])
         except Exception as e:
             logging.critical(f"\nError: {e}\n")
             self.downloadLink = "https://theuselessweb.com/"
