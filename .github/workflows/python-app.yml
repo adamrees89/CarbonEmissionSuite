@@ -29,6 +29,6 @@ jobs:
           coveralls
 
       - name: Coveralls
-        uses: AndreMiras/coveralls-python-action@develop
+        uses: coverallsapp/github-action@master
         with:
-          env: github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
