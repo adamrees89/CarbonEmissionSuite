@@ -1,6 +1,6 @@
 # CarbonEmissionSuite
 
-[![Build Status](https://app.travis-ci.com/adamrees89/CarbonEmissionSuite.svg?branch=master)](https://app.travis-ci.com/adamrees89/CarbonEmissionSuite)
+[![Python package](https://github.com/adamrees89/CarbonEmissionSuite/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/adamrees89/CarbonEmissionSuite/actions/workflows/python-app.yml)
 [![Coverage Status](https://coveralls.io/repos/github/adamrees89/CarbonEmissionSuite/badge.svg?branch=master)](https://coveralls.io/github/adamrees89/CarbonEmissionSuite?branch=master)
 [![](https://img.shields.io/github/license/adamrees89/CarbonEmissionSuite.svg)](https://choosealicense.com/licenses/mit/)
 
