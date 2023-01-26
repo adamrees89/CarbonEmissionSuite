@@ -25,10 +25,19 @@ jobs:
       - name: Test with unittest
         run: |
           coverage run -m unittest discover
-          coveralls --output=coverage.json --service=github
-          coveralls-lcov -v -n coverage.info > coverage.json
+          coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+  coveralls:
+    name: Indicate completion to coveralls.io
+    needs: test
+    runs-on: ubuntu-latest
+    container: python:3-slim
+    steps:
+    - name: Finished
+      run: |
+        pip3 install --upgrade coveralls
+        coveralls --service=github --finish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
