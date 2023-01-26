@@ -25,7 +25,7 @@ jobs:
 
       - name: Test with unittest
         run: |
-          python run -m unittest discover
+          python -m unittest discover
           coveralls --service=github
 
       - name: Coveralls
