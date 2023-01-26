@@ -26,7 +26,7 @@ jobs:
       - name: Test with unittest
         run: |
           python -m unittest discover
-          coveralls --service=github
+          coveralls
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
