@@ -31,4 +31,5 @@ jobs:
       - name: Coveralls
         uses: AndreMiras/coveralls-python-action@develop
         with:
-          github-token: ${{ GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage.xml
